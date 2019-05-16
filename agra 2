@@ -1,0 +1,19 @@
+DECLARE
+V_LINE   VARCHAR2 (200);
+data varchar2 (200);
+F   UTL_FILE.FILE_TYPE;
+begin
+F := UTL_FILE.FOPEN ('UPLOAD_DIR', 'pyramid.txt', 'R');
+	loop
+		begin
+		UTL_FILE.GET_LINE (F, V_LINE);
+		data := array_split(V_LINE,2);
+		DBMS_OUTPUT.put_line (data);
+		exception
+		WHEN NO_DATA_FOUND
+		then
+		exit;
+		end;
+	end loop;
+UTL_FILE.FCLOSE (F);
+end;
