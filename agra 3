@@ -1,0 +1,305 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Agra</title>
+	<link href="http://localhost/agra/assets/style.css" rel="stylesheet" />
+	<script type="text/javascript" src="http://localhost/agra/assets/chartjs/Chart.js"></script>
+	<?php
+        foreach($data as $data){
+            $target[] = $data->target;
+            $realization[] = (float) $data->realization;
+        }
+    ?>
+</head>
+<body>
+	<div id="head">
+	<font size=5px; style="margin-left:33px;"> Dana Summary</font>
+		<button id="headbut">Filters
+		</button>
+	</div>
+	
+	<div id="headpan">
+		<div id ="pani"><font size=4px>Group</font>
+		<br>
+			<select style="width:300px; background:none; color:rgb(80,80,80);">
+									  <option value="Gatsby">All</option>
+									  <option value="Custom">Custome</option>
+			</select>
+		
+		</div>
+		<div id ="pani"><font size=4px>Department</font>
+			<select style="width:300px; background:none; color:rgb(80,80,80);">
+									  <option value="Gatsby">Please select group at first</option>
+									  <option value="Custom">Custome</option>
+			</select>
+		</div>
+		<div id ="pani"><font size=4px>Product</font>Product
+			<select style="width:300px; background:none; color:rgb(80,80,80);">
+									  <option value="Gatsby">All</option>
+									  <option value="Custom">Custome</option>
+			</select>
+		</div>
+		<div id ="pani"><font size=4px>Date</font>Date
+			<select style="width:300px; background:none; color:rgb(80,80,80);">
+									  <option value="Gatsby">Choose a date</option>
+									  <option value="Custom">Custome</option>
+			</select>
+		</div>
+	</div>
+
+	<div id="conboxi">
+		<div id="boxi">
+		<font size=4px>Growth</font> 			
+		<select style="width:100px; background:none; color:rgb(80,80,80); opacity : 0.7; float:right; margin-right:10px;">
+									  <option value="Gatsby">Year to Date</option>
+									  <option value="Custom">Custome</option>
+		</select>
+		<canvas id="canvas" width="1000" height="280"></canvas>
+ 
+    <!--Load chart js-->
+    <script type="text/javascript" src="http://localhost/agra/assets/chartjs/chart.min.js'?>"></script>
+    <script>
+ 
+            var lineChartData = {
+                labels : <?php echo json_encode($target);?>,
+                datasets : [
+                     
+                    {
+                        fillColor: "rgba(60,141,188,0.9)",
+                        strokeColor: "rgba(60,141,188,0.8)",
+                        pointColor: "#3b8bba",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(152,235,239,1)",
+                        data : <?php echo json_encode($realization);?>
+                    }
+ 
+                ]
+                 
+            }
+ 
+        var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+         
+    </script>
+		</div>
+		<div id="boxii">
+		<font size=4px>Realization</font>
+		<canvas id="myChart"></canvas>
+	</div>
+ 
+ 
+	<script>
+		var ctx = document.getElementById("myChart").getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ["Red", "Blue", "Yellow", "Green"],
+				datasets: [{
+					label: '# of Votes',
+					data: [12, 19, 3, 23, 2, 3],
+					backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)'
+					],
+					borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+	</script>
+		</div>
+		
+		
+		
+		
+		<div id="boxiii">
+		<font size=4px>Top Realization</font><br><br>
+	<table style="width:380px; opacity: 0.8; font-size:14px;">
+    <tr>
+        <td>Name</td>
+        <td class="ctd">Amount</td>
+    </tr>
+    <tr>
+        <td>ASR WK KEPALA BURUNG</td>
+        <td class="ctd">5.21 T</td>
+    </tr>
+    <tr>
+        <td>Kementrian Keuangan RI</td>
+        <td class="ctd">4.80 T</td>
+    </tr>
+    <tr>
+        <td> Balai Penyedia Dan Pengelola</td>
+        <td class="ctd">4.19 T</td>
+    </tr>
+    <tr>
+        <td> BPJS KETENAGAKERJAAN</td>
+        <td class="ctd">2.61 T</td>
+    </tr>
+    <tr>
+        <td>Indoseia Asahan Alumunium</td>
+        <td class="ctd">2.12 T</td>
+    </tr>
+</table>
+<button style="float:right; margin-right:20px; margin-top:10px; border:none; width:60px; height:20px;"> see all
+</button>
+		</div>
+	</div>	
+	
+	<div id="conboxi">
+		<div id="boxiiii">
+			<font size=4px>Top Realization</font><br><br>
+			<DIV style="width:50%; float:left;">
+			<font size=4px>Positive Growth</font><br>
+					<table style="width:340px; opacity: 0.8; font-size:14px; float:left;">
+						<tr>
+							<td>Name</td>
+							<td class="ctd">Amount</td>
+						</tr>
+						<tr>
+							<td>ASR WK KEPALA BURUNG</td>
+							<td class="ctd">5.21 T</td>
+						</tr>
+						<tr>
+							<td>Kementrian Keuangan RI</td>
+							<td class="ctd">4.80 T</td>
+						</tr>
+						<tr>
+							<td> Balai Penyedia Dan Pengelola</td>
+							<td class="ctd">4.19 T</td>
+						</tr>
+						<tr>
+							<td> BPJS KETENAGAKERJAAN</td>
+							<td class="ctd">2.61 T</td>
+						</tr>
+						<tr>
+							<td>Indoseia Asahan Alumunium</td>
+							<td class="ctd">2.12 T</td>
+						</tr>
+					</table>
+<button style="float:right; margin-right:30px; margin-top:10px; border:none; width:60px; height:20px;"> see all
+</button>					
+			</DIV>
+			<DIV style="width:50%; float:left;">
+			<font size=4px>Negative Growth</font><br>
+					<table style="width:340px; opacity: 0.8; font-size:14px; float:left;">
+						<tr>
+							<td>Name</td>
+							<td class="ctd">Amount</td>
+						</tr>
+						<tr>
+							<td>ASR WK KEPALA BURUNG</td>
+							<td class="ctd">5.21 T</td>
+						</tr>
+						<tr>
+							<td>Kementrian Keuangan RI</td>
+							<td class="ctd">4.80 T</td>
+						</tr>
+						<tr>
+							<td> Balai Penyedia Dan Pengelola</td>
+							<td class="ctd">4.19 T</td>
+						</tr>
+						<tr>
+							<td> BPJS KETENAGAKERJAAN</td>
+							<td class="ctd">2.61 T</td>
+						</tr>
+						<tr>
+							<td>Indoseia Asahan Alumunium</td>
+							<td class="ctd">2.12 T</td>
+						</tr>
+					</table>	
+<button style="float:right; margin-right:30px; margin-top:10px; border:none; width:60px; height:20px;"> see all
+</button>					
+			</DIV>
+		</div>
+
+		<div id="boxiiiii">
+				<font size=4px>Composition</font> 			
+		<select style="width:100px; background:none; color:rgb(80,80,80); opacity : 0.7; float:right; margin-right:10px;">
+									  <option value="Gatsby">Department</option>
+									  <option value="Custom">Custome</option>
+		</select>
+		&#x3C;!DOCTYPE html PUBLIC &#x22;-//W3C//DTD XHTML 1.0 Strict//EN&#x22; &#x22;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&#x22;&#x3E;
+&#x3C;html xmlns=&#x22;http://www.w3.org/1999/xhtml&#x22;&#x3E;
+&#x3C;head&#x3E;
+&#x3C;meta http-equiv=&#x22;content-type&#x22; content=&#x22;text/html; charset=utf-8&#x22; /&#x3E;
+&#x3C;title&#x3E;Data Penduduk Indonesia &#x26;raquo; Jaranguda.com&#x3C;/title&#x3E;
+&#x3C;script src=&#x22;http://code.jquery.com/jquery-1.9.1.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
+&#x3C;script src=&#x22;http://code.highcharts.com/highcharts.js&#x22;&#x3E;&#x3C;/script&#x3E;
+&#x3C;script type=&#x22;text/javascript&#x22;&#x3E;
+ 
+$(function () {
+&#x9;$(&#x27;#container&#x27;).highcharts({
+&#x9;&#x9;chart: {
+&#x9;&#x9;&#x9;plotBackgroundColor: null,
+&#x9;&#x9;&#x9;plotBorderWidth: null,
+&#x9;&#x9;&#x9;plotShadow: false
+&#x9;&#x9;},
+&#x9;&#x9;tooltip: {
+&#x9;&#x9;&#x9;pointFormat: &#x27;{series.name}: &#x3C;b&#x3E;{point.percentage:.1f}%&#x3C;/b&#x3E;&#x27;
+&#x9;&#x9;},
+&#x9;&#x9;plotOptions: {
+&#x9;&#x9;&#x9;pie: {
+&#x9;&#x9;&#x9;&#x9;allowPointSelect: true,
+&#x9;&#x9;&#x9;&#x9;cursor: &#x27;pointer&#x27;,
+&#x9;&#x9;&#x9;&#x9;dataLabels: {
+&#x9;&#x9;&#x9;&#x9;&#x9;enabled: true,
+&#x9;&#x9;&#x9;&#x9;&#x9;format: &#x27;&#x3C;b&#x3E;{point.name}&#x3C;/b&#x3E;: {point.percentage:.1f} %&#x27;,
+&#x9;&#x9;&#x9;&#x9;&#x9;style: {
+&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;color: (Highcharts.theme &#x26;&#x26; Highcharts.theme.contrastTextColor) || &#x27;black&#x27;
+&#x9;&#x9;&#x9;&#x9;&#x9;}
+&#x9;&#x9;&#x9;&#x9;}
+&#x9;&#x9;&#x9;}
+&#x9;&#x9;},
+&#x9;&#x9;series: [{
+&#x9;&#x9;&#x9;type: &#x27;pie&#x27;,
+&#x9;&#x9;&#x9;name: &#x27;Persentase composition&#x27;,
+&#x9;&#x9;&#x9;data: [
+&#x9;&#x9;&#x9;&#x9;&#x9;&#x3C;?php 
+&#x9;&#x9;&#x9;&#x9;&#x9;// data yang diambil dari database
+&#x9;&#x9;&#x9;&#x9;&#x9;if(count($graph)&#x3E;0)
+&#x9;&#x9;&#x9;&#x9;&#x9;{
+&#x9;&#x9;&#x9;&#x9;&#x9;   foreach ($graph as $data) {
+&#x9;&#x9;&#x9;&#x9;&#x9;   echo &#x22;[&#x27;&#x22; .$data-&#x3E;Name . &#x22;&#x27;,&#x22; . $data-&#x3E;Bade .&#x22; &#x27;,&#x22; . $data-&#x3E;persen .&#x22;],\n&#x22;;
+&#x9;&#x9;&#x9;&#x9;&#x9;   }
+&#x9;&#x9;&#x9;&#x9;&#x9;}
+&#x9;&#x9;&#x9;&#x9;&#x9;?&#x3E;
+&#x9;&#x9;&#x9;]
+&#x9;&#x9;}]
+&#x9;});
+});
+ 
+&#x3C;/script&#x3E;
+&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+ 
+&#x3C;div id=&#x22;container&#x22;&#x3E;&#x3C;/div&#x3E;
+ 
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
+		</div>		
+	</div>	
+	
+	
+	
+
+</body>
+</html>
