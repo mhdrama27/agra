@@ -1,0 +1,31 @@
+declare
+	nilai number:=&nilai;
+	j integer;
+	k integer;
+	a integer;
+	d integer;
+	total integer;
+begin
+total := 0;
+d := 1;
+k:=d-1;
+	loop
+		loop
+			if (mod(d, k) != 0) then
+			a := 1;
+			else
+			a := 0;
+			end if;
+			k:=k-1;
+		exit when k = 1 or a = 0;
+		end loop;
+
+	if (a = 1) then
+	total:=total+1;
+	dbms_output.put_line(d);
+	end if;
+	d:= d+1;
+	k:= d-1;
+	exit when total = nilai;
+	end loop;
+end;
